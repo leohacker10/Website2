@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Barak Chauffeur Service</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            text-align: center;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: skyblue;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form class="login-form" onsubmit="return login()">
+            <input type="text" id="login-user-id" placeholder="User ID" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function login() {
+            var userId = document.getElementById('login-user-id').value;
+            var password = document.getElementById('login-password').value;
+
+            // Get credentials from localStorage
+            var users = JSON.parse(localStorage.getItem('users')) || [];
+            console.log('Stored Users:', users);
+
+            var user = users.find(user => user.loginId === userId && user.password === password);
+
+            if (user) {
+                window.location.href = 'index.html'; // Redirect to the main booking page
+                return false;
+            } else {
+                alert('Incorrect User ID or Password');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
